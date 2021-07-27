@@ -33,6 +33,9 @@ export default class User extends BaseModel {
     }
   }
 
+  @column()
+  public flag: 'admin' | 'client'
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
