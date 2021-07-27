@@ -3,19 +3,17 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class Transactions extends BaseSchema {
   protected tableName = 'transactions'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-
-      /**
-       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
-       */
+      table.uuid('sender_id').references('id').inTable('users')
+      table.uuid('receiver_id').references('id').inTable('users')
+      table.float('value').notNullable()
       table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }
