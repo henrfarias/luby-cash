@@ -19,6 +19,10 @@ export default class Users extends BaseSchema {
   }
 
   public async down() {
+    this.schema.alterTable('transactions', (table) => {
+      table.dropForeign('sender_id')
+      table.dropForeign('receiver_id')
+    })
     this.schema.dropTable(this.tableName)
   }
 }
