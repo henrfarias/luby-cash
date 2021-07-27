@@ -5,7 +5,9 @@ export default class UsersController {
 
   public async create({}: HttpContextContract) {}
 
-  public async store({}: HttpContextContract) {}
+  public async store({ response }: HttpContextContract) {
+    return response.unauthorized()
+  }
 
   public async show({}: HttpContextContract) {}
 
