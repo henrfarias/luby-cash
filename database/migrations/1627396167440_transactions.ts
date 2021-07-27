@@ -6,8 +6,8 @@ export default class Transactions extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.uuid('sender_id').references('id').inTable('users')
-      table.uuid('receiver_id').references('id').inTable('users')
+      table.uuid('sender_id').notNullable()
+      table.uuid('receiver_id').notNullable()
       table.float('value').notNullable()
       table.timestamp('created_at', { useTz: true })
     })

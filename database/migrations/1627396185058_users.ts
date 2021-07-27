@@ -11,6 +11,11 @@ export default class Users extends BaseSchema {
       table.string('flag').notNullable().defaultTo('client')
       table.timestamps()
     })
+
+    this.schema.alterTable('transactions', (table) => {
+      table.foreign('sender_id').references('users.id')
+      table.foreign('receiver_id').references('users.id')
+    })
   }
 
   public async down() {
