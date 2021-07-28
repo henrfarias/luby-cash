@@ -8,12 +8,17 @@ export default class AdminsController {
     if (flag === 'admin') {
       return true
     }
+    return false
   }
 
-  public async index({}: HttpContextContract) {}
+  public async index({ auth, response }: HttpContextContract) {
+    !this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
+    const admins = await User.query().where('flag', 'admin')
+    return admins
+  }
 
   public async store({ auth, request, response }: HttpContextContract) {
-    this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
+    !this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
     const { email, password } = request.only(['email', 'password'])
     const user = await User.create({
       email,
