@@ -5,12 +5,12 @@ import supertest from 'supertest'
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}`
 
 test.group('Admins', () => {
-  test('master admin must enter the table when init server', async (assert) => {
+  test('master admin must enter the table when init database', async (assert) => {
     const user = await User.findByOrFail('flag', 'admin')
     assert.exists(user)
   })
 
-  test('admin must be authenticated', async () => {
+  test('ensure witch unauthorized user not ', async () => {
     const user = { email: 'admin@unauthorized.com', password: 'admin', flag: 'admin' }
     await supertest(BASE_URL)
       .post('/register-admin')
