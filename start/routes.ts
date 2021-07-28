@@ -23,6 +23,8 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/session', 'SessionsController.store')
 Route.delete('/session', 'SessionsController.destroy')
 
+Route.post('/register', 'ClientsController.create')
+
 Route.group(() => {
   Route.get('/admin', 'AdminsController.index')
   Route.post('/admin', 'AdminsController.store')

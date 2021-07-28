@@ -28,8 +28,6 @@ export default class AdminsController {
     return user
   }
 
-  public async show({}: HttpContextContract) {}
-
   public async update({ auth, request, response }: HttpContextContract) {
     !this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
     const admin = await User.findOrFail(auth.use('api').user?.id)
