@@ -12,11 +12,7 @@ test.group('Admins', () => {
 
   test('ensure witch unauthorized user not ', async () => {
     const user = { email: 'admin@unauthorized.com', password: 'admin', flag: 'admin' }
-    await supertest(BASE_URL)
-      .post('/admin/register')
-      .send(user)
-      .set('Authorization', '')
-      .expect(401)
+    await supertest(BASE_URL).post('/admin').send(user).set('Authorization', '').expect(401)
   })
 
   test('Only one admin can register an admin', async () => {
@@ -25,7 +21,7 @@ test.group('Admins', () => {
     const response = await supertest(BASE_URL).post('/session').send(user)
     console.log(response.body)
     await supertest(BASE_URL)
-      .post('/admin/register')
+      .post('/admin')
       .send(newAdmin)
       .set('Authorization', `Bearer ${response.body.token}`)
       .expect(401)

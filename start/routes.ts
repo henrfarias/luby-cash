@@ -25,5 +25,7 @@ Route.delete('/session', 'SessionsController.destroy')
 
 Route.group(() => {
   Route.get('/admin', 'AdminsController.index')
-  Route.post('/admin/register', 'AdminsController.store')
+  Route.post('/admin', 'AdminsController.store')
+  Route.put('/admin', 'AdminsController.update')
+  Route.delete('/admin', 'AdminsController.destroy')
 }).middleware(['auth'])

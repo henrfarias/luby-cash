@@ -30,7 +30,19 @@ export default class AdminsController {
 
   public async show({}: HttpContextContract) {}
 
-  public async update({}: HttpContextContract) {}
+  public async update({ auth, request, response }: HttpContextContract) {
+    !this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
+    const admin = await User.findOrFail(auth.use('api').user?.id)
+    const data = request.only(['email', 'password'])
+    admin.merge(data)
+    await admin.save()
 
-  public async destroy({}: HttpContextContract) {}
+    return admin
+  }
+
+  public async destroy({ auth, response }: HttpContextContract) {
+    !this.authAdmin(auth) && response.unauthorized('Only admins can make this action')
+    const admin = await User.findOrFail(auth.use('api').user?.id)
+    admin.delete()
+  }
 }
