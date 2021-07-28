@@ -11,9 +11,11 @@ test.group('Admins', () => {
   })
 
   test('Only one admin can register an admin', async () => {
-    await supertest(BASE_URL)
-      .post('/register-admin')
-      .send({ email: 'teste@teste.com', password: 'admin', flag: 'admin' })
-      .expect(401)
+    const user = { email: 'teste@teste.com', password: 'admin', flag: 'client' }
+    await supertest(BASE_URL).post('/register-admin').send(user).expect(401)
+  })
+
+  test('If admin not exist should return unauthorized', () => {
+
   })
 })
