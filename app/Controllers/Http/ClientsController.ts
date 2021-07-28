@@ -1,15 +1,11 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class UsersController {
+export default class ClientsController {
   public async index({}: HttpContextContract) {}
 
   public async create({}: HttpContextContract) {}
 
-  public async store({ request, response }: HttpContextContract) {
-    if (request.body().flag !== 'admin') {
-      return response.unauthorized()
-    }
-  }
+  public async store({}: HttpContextContract) {}
 
   public async show({}: HttpContextContract) {}
 

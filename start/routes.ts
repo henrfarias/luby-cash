@@ -20,4 +20,8 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.post('/register-admin', 'UsersController.store')
+Route.post('/login', 'SessionsController.store')
+
+Route.group(() => {
+  Route.post('/register-admin', 'AdminsController.store')
+}).middleware(['auth'])
