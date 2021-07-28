@@ -22,7 +22,7 @@ test.group('Admins', () => {
   test('Only one admin can register an admin', async () => {
     const user = { email: 'fakeuser@fake.com', password: 'fake' }
     const newAdmin = { email: 'newadmin@admin.com', password: 'admin' }
-    const response = await supertest(BASE_URL).post('/login').send(user)
+    const response = await supertest(BASE_URL).post('/session').send(user)
     console.log(response.body)
     await supertest(BASE_URL)
       .post('/register-admin')
