@@ -37,6 +37,7 @@
     "@adonisjs/lucid": "^15.0.3",
     "@adonisjs/redis": "^7.0.8",
     "@adonisjs/repl": "^3.0.0",
+    "kafkajs": "^1.15.0",
     "luxon": "^2.0.1",
     "pg": "^8.6.0",
     "phc-bcrypt": "^1.0.7",
